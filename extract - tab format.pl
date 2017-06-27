@@ -7,11 +7,10 @@ use strict;
 #}
 
 my $output_file = "output.txt";
+
 my $base_path = $ARGV[0];
 my $regex_file = $ARGV[1];
 my $regex_string = '';
-
-#print "$base_path\n$regex_file\n";
 
 read_in_regex();
 process_files ($base_path);
@@ -29,6 +28,7 @@ sub read_in_regex
 	$regex_string =~ s/^.//;
 #	print $regex_string;
 }
+
 
 # Accepts one argument: the full path to a directory.
 # Returns: nothing.
@@ -79,11 +79,11 @@ sub process_files
 			{
 				#print $line;
 				#(my $no_line_feed = $line) =~ s/\R//;
-				print $file . "\r\n\tOriginal: $line\r\n";
+				print $file . "\t$line";
 
 				foreach my $s (@extraction)
 				{
-					print "\tmatch: $s\r\n";
+					print "\t$s";
 					my $start = 0;
 #					my $match = $s;
 					if (index($line, $s)-50 > 0)
@@ -100,14 +100,14 @@ sub process_files
 
 					#$value =~ m/\d+/;
 #					print $file . "\t" . $line . "\t" . $extras . "\t" . index($line, $s) . "\t" . length($s) . "\n";
-					$extras =~ s/\R//g;
-					print "\tExtra: $extras\r\n\tvalue: $value\r\n";
+#					$extras =~ s/\R//g;
+					print "\t$extras\t$value";
 				}
 				#print $file . "\t" . $line . "\n";
 				#print $file . "\t" . $4 . "\n";
 				#my $captured = $line=~/$ARGV[1]/g;
 				#print $file . "\t" . $capture . "\n";
-				print "\r\n";
+				print "\n";
 			}
 				
 		}
